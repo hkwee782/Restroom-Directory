@@ -26,8 +26,12 @@ pip install flask flask-sqlalchemy
 ```
 
 ### 5. Run the app
-navigate to the repository containing Restroom-Directory folder
+Navigate to the repository containing Restroom-Directory folder, then run:
 ```
 python app.py
 ```
 
+### 6. Exit the app
+```
+control + C
+```
