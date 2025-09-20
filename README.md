@@ -1,16 +1,16 @@
 # Restroom-Directory
 
-### Clone the repo
+### 1. Clone the repo
 ```
 git clone <insert link here>
 ```
 
-### Install the virtual environment
+### 2. Install the virtual environment
 ```
 python -m venv venv
 ```
 
-### Activate the virtual environment
+### 3. Activate the virtual environment
 #### For Windows
 ```
 venv\scripts\activate
@@ -20,12 +20,12 @@ venv\scripts\activate
 source venv/bin/activate
 ```
 
-### Install Flask and Flask SQL Alchemy
+### 4. Install Flask and Flask SQL Alchemy
 ```
 pip install flask flask-sqlalchemy
 ```
 
-### Run the app
+### 5. Run the app
 navigate to the repository containing Restroom-Directory folder
 ```
 python app.py
