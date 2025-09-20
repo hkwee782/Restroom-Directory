@@ -5,4 +5,5 @@ git clone <git link>
 
 ### Run the app
 navigate to your local repository
+
 python app.py
