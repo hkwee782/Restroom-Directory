@@ -20,9 +20,11 @@ venv\scripts\activate
 source venv/bin/activate
 ```
 
-### 4. Install Flask and Flask SQL Alchemy
+### 4. Install Flask and Flask SQL Alchemy and psycopg2
 ```
 pip install flask flask-sqlalchemy
+pip install psycopg2-binary
+
 ```
 
 ### 5. Run the app
