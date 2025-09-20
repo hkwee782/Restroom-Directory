@@ -1,33 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
-<body style= "background-color:rgb(212, 241, 255);">
-    <h1> Building Name </h1>
-    <h2> Floor </h2>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Icon Library-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        .checked {
+            color: orange;
+        }
+        .features {
+            background-color: rgb(237, 232, 220);
+            color: black;
+            border: 2px solid black;
+            margin: 20px;
+            padding: 20px;
+        }
+        body, html {
+        height: 75%;
+        margin: 0;
+        font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .building-image {
+        background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("posvarBR.jpeg");
+        height: 50%;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        position: relative;
+        }
+
+        .building-text {
+        text-align: left;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: white;
+        }
+
+    </style>
+</head>
+<body style= "background-color:rgb(193, 207, 161);">
+    <div class="building-image">
+        <div class="building-text">
+          <h1 style="font-size:36px">Building</h1>
+          <p>Floor #</p>
+        </div>
+      </div>
+      
+
+<div class="features">
     <h3> Accessibility </h3>
     <ul>
         <li> Wheelchair Access </li>
-        <li> Maternity </li>
+        <li> Changing Station </li>
     
     </ul>
-  
+</div>
+    
+<div class="features">
+    <div class="card"></div>
     <h3> Cleanliness </h3>
 
+       <span class = "fa fa-star checked"></span>
+       <span class = "fa fa-star checked"></span>
+       <span class = "fa fa-star checked"></span>
+       <span class = "fa fa-star"></span>
+       <span class = "fa fa-star"></span>
+</div>
 
-    <input type="radio" id="star5" name="rating" value="5" /><label for="star5"></label>
-    <input type="radio" id="star4" name="rating" value="4" /><label for="star4"></label>
-    <input type="radio" id="star3" name="rating" value="3" /><label for="star3"></label>
-    <input type="radio" id="star2" name="rating" value="2" /><label for="star2"></label>
-    <input type="radio" id="star1" name="rating" value="1" /><label for="star1"></label>
-
-
+<div class="features">
     <h3> Amenities </h3>
-
-
     <label>
     <input type="checkbox" name="checkbox" value="value">
         Text
     </label>
-
+</div>
+   
     
 </body>
 </html>
