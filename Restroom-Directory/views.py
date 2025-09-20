@@ -9,3 +9,4 @@ def home():
 @views.route("/response")
 def response():
     return render_template("response.html")
+
