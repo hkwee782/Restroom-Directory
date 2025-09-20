@@ -3,11 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <style>
+        body {
+            margin: 0;
+        }
+        #map {
+            width: 640px;
+            height: 480px;
+            background-color: grey;
+        }
+    </style>
     <title>Home</title>
 </head>
-<body>
+<body onload="initMap()">
     <div><h1>Home Page</h1>
-    <p> {{var}} </p>
+    <p> {{data}} </p>
     </div>
+
+    <div id="map"></div>
+
+    <script>
+        var map;
+        function create_markers() {
+            var markers = [
+                ["Delaware State Monument", "39.8161", "-77.23247"],
+                ["Indiana State Monument", "39.814138", "-77.216287"],
+                ["New York State Monument", "39.8208", "-77.2306"],
+                ["New York Auxiliary State Monument", "39.8043", "-77.23445"],
+                ["Pennsylvania State Memorial", "39.807588", "-77.235153"],
+                ["United States Regulars Monument", "39.811217", "-77.235683"],
+                ["United States Signal Corps Marker", "39.79254", "-77.236503"],
+                ["Vermont State Monument", "39.80945", "-77.23636"],
+            ];
+            for ( var i = 0; i < markers.length; i++ ) {
+                marker = new L.marker( [ markers[i][1], markers[i][2] ] )
+                    .bindPopup( markers[i][0] )
+                    .addTo( map );
+            }
+        }
+        function initMap() {
+            map = L.map( 'map', {
+                center: [ 39.807305, -77.224207 ],
+                zoom: 13
+            });
+            L.tileLayer( 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo( map );
+            create_markers();
+        }
+        </script>
+
+        <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+
 </body>
 </html>
