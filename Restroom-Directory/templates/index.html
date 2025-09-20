@@ -10,40 +10,52 @@
     <title>Home</title>
 </head>
 <body onload="initMap()">
-    <div>
-        <h1>Buildings</h1>
+    <div class="sidenav">
+        <form>
+            <div>
+                <label for="location_zip">Find a Restroom</label>
+                <input id = "location_zip" type ="text" placeholder="Enter your Zip Code">
+              </div>
+        </form>
+
+        <div class="building_block">
+            <h2>Cathedral of Learning<br></h2>
+            <h3>4200 Fifth Ave, Pittsburgh, PA 15260</h3>
+        </div>
     </div>
 
-    <div id="map"></div>
+    <div class="main">
+        <div id="map"></div>
 
-    <script>
-        var map;
-        function create_markers() {
-            var markers = [
-                ["Cathedral of Learning", "40.44424", "-79.95283"],
-                ["Wesley W. Posvar Hall", "40.4416","-79.9538"],
-                ["Michael L. Benedum Hall", "40.4436", "-79.9587"],
-                ["David Lawrence Hall", "40.4423869", "-79.9549878"],
-            ];
-            for ( var i = 0; i < markers.length; i++ ) {
-                marker = new L.marker( [ markers[i][1], markers[i][2] ] )
-                    .bindPopup( markers[i][0] )
-                    .addTo( map );
+        <script>
+            var map;
+            function create_markers() {
+                var markers = [
+                    ["Cathedral of Learning", "40.44424", "-79.95283"],
+                    ["Wesley W. Posvar Hall", "40.4416","-79.9538"],
+                    ["Michael L. Benedum Hall", "40.4436", "-79.9587"],
+                    ["David Lawrence Hall", "40.4423869", "-79.9549878"],
+                ];
+                for ( var i = 0; i < markers.length; i++ ) {
+                    marker = new L.marker( [ markers[i][1], markers[i][2] ] )
+                        .bindPopup( markers[i][0] )
+                        .addTo( map );
+                }
             }
-        }
-        function initMap() {
-            map = L.map( 'map', {
-                center: [ 40.44424, -79.95283 ],
-                zoom: 15
-            });
-            L.tileLayer( 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-            }).addTo( map );
-            create_markers();
-        }
-        </script>
+            function initMap() {
+                map = L.map( 'map', {
+                    center: [ 40.44424, -79.95283 ],
+                    zoom: 15
+                });
+                L.tileLayer( 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                }).addTo( map );
+                create_markers();
+            }
+            </script>
 
-        <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+            <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    </div>
 
 </body>
 </html>
