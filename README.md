@@ -7,7 +7,7 @@ git clone <insert link here>
 ```
 
 ### Run the app
-navigate to your local repository
+navigate to the repository containing Restroom-Directory folder
 ```
 bash
 python app.py
