@@ -9,8 +9,35 @@ html, body{
     width: 100%;
 }
 
+.main {
+  margin-left: 30%;
+  height: 100%;
+  width: 75%
+}
+
+.sidenav {
+  height: 100%;
+  width: 30%;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: white;
+  overflow-x: hidden;
+  padding-top: 20px;
+}
+
 #map {
     height: 100%;
     width: 100%;
-    background-color: white;
+}
+
+.building_block{
+    border-width: 1px;
+    border-color: black;
+    border-style: solid;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    padding: 10px;
 }

@@ -1,4 +1,5 @@
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, request, redirect, url_for
+import psycopg2
 
 views = Blueprint("views", __name__)
 
