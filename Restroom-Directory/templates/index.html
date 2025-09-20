@@ -27,14 +27,14 @@
         var map;
         function create_markers() {
             var markers = [
-                ["Delaware State Monument", "39.8161", "-77.23247"],
-                ["Indiana State Monument", "39.814138", "-77.216287"],
-                ["New York State Monument", "39.8208", "-77.2306"],
-                ["New York Auxiliary State Monument", "39.8043", "-77.23445"],
-                ["Pennsylvania State Memorial", "39.807588", "-77.235153"],
-                ["United States Regulars Monument", "39.811217", "-77.235683"],
-                ["United States Signal Corps Marker", "39.79254", "-77.236503"],
-                ["Vermont State Monument", "39.80945", "-77.23636"],
+                ["Cathedral of Learning", "40.44424", "-79.95283"],
+                // ["Indiana State Monument", "39.814138", "-77.216287"],
+                // ["New York State Monument", "39.8208", "-77.2306"],
+                // ["New York Auxiliary State Monument", "39.8043", "-77.23445"],
+                // ["Pennsylvania State Memorial", "39.807588", "-77.235153"],
+                // ["United States Regulars Monument", "39.811217", "-77.235683"],
+                // ["United States Signal Corps Marker", "39.79254", "-77.236503"],
+                // ["Vermont State Monument", "39.80945", "-77.23636"],
             ];
             for ( var i = 0; i < markers.length; i++ ) {
                 marker = new L.marker( [ markers[i][1], markers[i][2] ] )
@@ -44,7 +44,7 @@
         }
         function initMap() {
             map = L.map( 'map', {
-                center: [ 39.807305, -77.224207 ],
+                center: [ 40.44424, -79.95283 ],
                 zoom: 13
             });
             L.tileLayer( 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
