@@ -140,7 +140,15 @@ def home():
         {"id": b.bID, "name": b.name, "lat": b.lat, "lon": b.lon}
         for b in buildings
     ]
-    return render_template("index.html", buildings=buildings, buildings_data=buildings_data)
+    avg_clean_data = db.session.query(
+        Building.name, Bathroom.floor, func.avg(Review.cleanliness).label('avg_clean')
+    ).join(
+        Bathroom, Building.bID == Bathroom.bID
+    ).join(
+        Review, Bathroom.brID == Review.brID
+    ).group_by(Building.name).all()
+
+    return render_template("index.html", buildings=buildings, buildings_data=buildings_data, avg_clean=avg_clean_data)
 
 
 @app.route("/response", methods=['GET', 'POST'])
