@@ -82,7 +82,11 @@ def initialize_reviews():
     review_data = [(1, 1, True, False, 3, None),
                     (2, 2, False, False, 1, None),
                     (3, 3, True, True, 5, None),
-                    (4, 4, False, True, 2, None)]
+                    (4, 4, False, True, 2, None),
+                    (5, 5, True, True, 5, None),
+                    (6, 6, False, True, 2, None),
+                    (7, 7, True, False, 4, None),
+                    ]
 
     for brID, rID, wheelchair, menstrual, clean, review in review_data:
         if not db.session.get(Review, rID):
@@ -169,17 +173,17 @@ def response():
 
     if result:
         building, bathroom, review, avg_clean = result
-        # Pass the variables to the template
-        return render_template(
-            "response.html",
-            name=building.name,
-            floor=bathroom.floor,
-            wheelchair=review.wheelchair,
-            avg_clean=int(avg_clean),
-            menstrual=review.menstrual,
-            baby_station=False, # Assuming no baby station for now
-            braille_signage=False # Assuming no braille signage for now
-        )
+        if review:
+                return render_template(
+                "response.html",
+                name=building.name,
+                floor=bathroom.floor,
+                wheelchair=review.wheelchair,
+                avg_clean=int(avg_clean),
+                menstrual=review.menstrual,
+                baby_station=False, # Assuming no baby station for now
+                braille_signage=False # Assuming no braille signage for now
+            )
     return render_template("response.html", name = name, floor = floor)
 
 @app.route("/buildings", methods=['GET', 'POST'])

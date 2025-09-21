@@ -68,7 +68,7 @@
 
     function create_markers() {
         var markers = {{ buildings_data | safe }};
-        
+
         for (var i = 0; i < markers.length; i++) {
             new L.marker([markers[i].lat, markers[i].lon])
                 .bindPopup(markers[i].name)

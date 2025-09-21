@@ -164,12 +164,13 @@
         <ul>
             {% if wheelchair %}
                 <li> ♿️ Wheelchair Access </li>
-            {% endif %}
             <!-- {% if baby %}
                 <li> 👩‍🍼 Baby Station </li>
             {% endif %} -->
-            {% if menstrual %}
+            {% elif menstrual %}
                 <li> 🩸 Menstrual Products </li>
+            {% else %}
+                <li> No accessibility rating available. </li>
             {% endif %}
             <!-- {% if braille %}
                 <li> 👁️ Braille Signage </li>
@@ -181,12 +182,12 @@
         <div class="card"></div>
         <h2> 🧼 Cleanliness </h2>
         {% if avg_clean %}
-        {% for _ in range(avg_clean) %}
-            <span class="fa fa-star fa-2x checked"></span>
-        {% endfor %}
-        {% for _ in range(5 - avg_clean) %}
-            <span class="fa fa-star fa-2x"></span>
-        {% endfor %}
+            {% for _ in range(avg_clean) %}
+                <span class="fa fa-star fa-2x checked"></span>
+            {% endfor %}
+            {% for _ in range(5 - avg_clean) %}
+                <span class="fa fa-star fa-2x"></span>
+            {% endfor %}
         {% else %}
             <p>No cleanliness rating available.</p>
         {% endif %}
