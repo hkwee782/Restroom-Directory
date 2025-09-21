@@ -130,7 +130,7 @@ def home():
 
 @app.route("/response")
 def response():
-    return render_template("response.html")
+    return render_template("response.html", )
 
 @app.route("/buildings", methods=['GET', 'POST'])
 def buildings():
