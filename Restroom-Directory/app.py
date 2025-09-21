@@ -60,7 +60,11 @@ def initialize_bathrooms():
     bathrooms_data = [(1, -1, 1),
                     (1, 2, 2),
                     (1, 32, 3),
-                    (1, 20, 4)]
+                    (1, 20, 4),
+                    (2, 5, 5),
+                    (2, 1, 6),
+                    (3, 8, 7),
+                    (4, 2, 8),]
 
     for bID, floor, brID in bathrooms_data:
         if not Bathroom.query.filter_by(bID=bID, floor=floor).first():
