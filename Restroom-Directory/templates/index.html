@@ -37,7 +37,7 @@
         <div class="floor_row">
             {% for bathroom in building.bathrooms %}
             <div class="building_floor_block">
-                <a href="{{ url_for('buildings') }}">
+                <a href="{{ url_for('response', name=building.name, floor=bathroom.floor )}}">
                     <h4>
                         {% if bathroom.floor == -1 %}
                             Ground

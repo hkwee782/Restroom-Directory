@@ -145,8 +145,14 @@
 <body style= "background-color:rgb(193, 207, 161);">
     <div class="building-image">
         <div class="building-text">
-          <h1 style="font-size:36px">🏫 Building</h1>
-          <p>📍 Floor #</p>
+            <h1 style="font-size:36px">🏫 {{ name }}</h1>
+            <p>📍
+            {% if floor == -1 %}
+                Ground
+            {% else %}
+                Floor {{ floor }}
+            {% endif %}
+            </p>
         </div>
     </div>
     

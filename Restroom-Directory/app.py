@@ -133,13 +133,15 @@ def home():
         {"id": b.bID, "name": b.name, "lat": b.lat, "lon": b.lon}
         for b in buildings
     ]
-
     return render_template("index.html", buildings=buildings, buildings_data=buildings_data)
 
 
-@app.route("/response")
+@app.route("/response", methods=['GET', 'POST'])
 def response():
-    return render_template("response.html", )
+    name = request.args.get('name', type=str)
+    floor = request.args.get('floor', type=int)
+
+    return render_template("response.html", name = name, floor = floor)
 
 @app.route("/buildings", methods=['GET', 'POST'])
 def buildings():
