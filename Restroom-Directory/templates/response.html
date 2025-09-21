@@ -176,17 +176,22 @@
             {% endif %} -->
         </ul>
     </div>
-        
+
     <div class="features">
         <div class="card"></div>
         <h2> 🧼 Cleanliness </h2>
-           <span class = "fa fa-star fa-2x checked"></span>
-           <span class = "fa fa-star fa-2x checked"></span>
-           <span class = "fa fa-star fa-2x checked"></span>
-           <span class = "fa fa-star fa-2x"></span>
-           <span class = "fa fa-star fa-2x"></span>
+        {% if avg_clean %}
+        {% for _ in range(avg_clean) %}
+            <span class="fa fa-star fa-2x checked"></span>
+        {% endfor %}
+        {% for _ in range(5 - avg_clean) %}
+            <span class="fa fa-star fa-2x"></span>
+        {% endfor %}
+        {% else %}
+            <p>No cleanliness rating available.</p>
+        {% endif %}
     </div>
-    
+
     <div class="features">
         <h2> 🏷️ Amenities </h2>
         <ul>

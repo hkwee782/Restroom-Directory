@@ -149,7 +149,7 @@ def response():
     floor = request.args.get('floor', type=int)
 
     result = db.session.query(
-        Building, Bathroom, Review
+        Building, Bathroom, Review, func.avg(Review.cleanliness).label('avg_clean')
     ).join(
         Bathroom, Building.bID == Bathroom.bID
     ).join(
@@ -160,18 +160,18 @@ def response():
     ).first()
 
     if result:
-        building, bathroom, review = result
+        building, bathroom, review, avg_clean = result
         # Pass the variables to the template
         return render_template(
             "response.html",
             name=building.name,
             floor=bathroom.floor,
             wheelchair=review.wheelchair,
+            avg_clean=int(avg_clean),
             menstrual=review.menstrual,
             baby_station=False, # Assuming no baby station for now
             braille_signage=False # Assuming no braille signage for now
         )
-
     return render_template("response.html", name = name, floor = floor)
 
 @app.route("/buildings", methods=['GET', 'POST'])
