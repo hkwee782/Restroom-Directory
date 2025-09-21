@@ -88,9 +88,21 @@ def add_review(brID, rID, wheelchair, menstrual, clean, review):
     db.session.commit()
 
 
-from views import views
+# from views import views
+# app.register_blueprint(views) # url_prefix="/views"
 
-app.register_blueprint(views) # url_prefix="/views"
+@app.route("/")
+def home():
+    return render_template("index.html")
+
+@app.route("/response")
+def response():
+    return render_template("response.html")
+
+@app.route("/buildings", methods=['GET', 'POST'])
+def buildings():
+    buildings = Building.query.all()
+    return render_template("buildings.html", buildings=buildings)
 
 if __name__ == '__main__':
     with app.app_context():  # Needed for DB operations
