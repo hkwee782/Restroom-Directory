@@ -24,6 +24,27 @@
             </tr>
             {% endfor %}
         </tbody>
+        <tbody>
+            {% for bathroom in bathrooms %}
+            <tr>
+                <td>{{ bathroom.bID }}</td>
+                <td>{{ bathroom.floor }}</td>
+                <td>{{ bathroom.brID }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        <tbody>
+            {% for reviews in reviews %}
+            <tr>
+                <td>{{ reviews.brID }}</td>
+                <td>{{ reviews.rID }}</td>
+                <td>{{ reviews.wheelchair }}</td>
+                <td>{{ reviews.accessibility }}</td>
+                <td>{{ reviews.cleanliness }}</td>
+                <td>{{ reviews.review }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
     </table>
 </body>
 </html>

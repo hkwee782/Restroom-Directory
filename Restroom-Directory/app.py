@@ -22,9 +22,9 @@ class Building(db.Model):
 
 class Bathroom(db.Model):
     __tablename__ = 'bathroom'
-    brID = db.Column(db.Integer, db.ForeignKey('building.bID'), primary_key=True, nullable=False)
+    bID = db.Column(db.Integer, db.ForeignKey('building.bID'), primary_key=True, nullable=False)
     floor = db.Column(db.Integer, primary_key= True, nullable=False)
-    rID = db.Column(db.Integer, nullable=False)
+    brID = db.Column(db.Integer, nullable=False)
     reviews = db.relationship('Review', backref='bathroom', lazy=True)
     pass
 
@@ -56,6 +56,39 @@ def initialize_buildings():
             ))
     db.session.commit()
 
+def initialize_bathrooms():
+    bathrooms_data = [(1, -1, 1),
+                    (1, 2, 2),
+                    (1, 32, 3),
+                    (1, 20, 4)]
+
+    for bID, floor, brID in bathrooms_data:
+        if not Bathroom.query.filter_by(bID=bID, floor=floor).first():
+            db.session.add(Bathroom(
+                bID = bID,
+                floor = floor,
+                brID = brID
+            ))
+    db.session.commit()
+
+def initialize_reviews():
+    review_data = [(1, 1, True, False, 3, None),
+                    (2, 2, False, False, 1, None),
+                    (3, 3, True, True, 5, None),
+                    (4, 4, False, True, 2, None)]
+
+    for brID, rID, wheelchair, menstrual, clean, review in review_data:
+        if not db.session.get(Review, rID):
+            db.session.add(Review(
+                brID = brID,
+                rID = rID,
+                wheelchair = wheelchair,
+                menstrual = menstrual,
+                cleanliness = clean,
+                review = review
+            ))
+    db.session.commit()
+
 def add_building(bID, name, lat, lon):
     if not db.session.get(Building, bID):
             db.session.add(Building(
@@ -71,7 +104,7 @@ def add_bathroom(bID, floor, rID):
         db.session.add(Bathroom(
             bID=bID,
             floor = floor,
-            rID = rID
+            brID = rID
         ))
     db.session.commit()
 
@@ -102,11 +135,15 @@ def response():
 @app.route("/buildings", methods=['GET', 'POST'])
 def buildings():
     buildings = Building.query.all()
-    return render_template("buildings.html", buildings=buildings)
+    bathrooms = Bathroom.query.all()
+    reviews = Review.query.all()
+    return render_template("buildings.html", buildings=buildings, bathrooms=bathrooms, reviews=reviews)
 
 if __name__ == '__main__':
     with app.app_context():  # Needed for DB operations
         db.create_all()      # Creates the database and tables
         initialize_buildings()
+        initialize_bathrooms()
+        initialize_reviews()
     app.run(debug = True, port=5000)
 
