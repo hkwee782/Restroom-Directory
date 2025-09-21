@@ -35,5 +35,5 @@ python app.py
 
 ### 6. Exit the app
 ```
-control + C
+CTRL + C
 ```
