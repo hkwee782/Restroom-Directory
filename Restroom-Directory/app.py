@@ -1,6 +1,5 @@
 from flask import Flask, render_template, request, redirect
 from flask_sqlalchemy import SQLAlchemy
-from views import views
 
 app = Flask(__name__)
 
@@ -11,8 +10,6 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False  # Avoids a warning
 # Create SQLAlchemy instance
 db = SQLAlchemy(app)
 
-app.register_blueprint(views) # url_prefix="/views"
-
 # Databases
 class Building(db.Model):
     __tablename__ = 'building'
@@ -21,6 +18,7 @@ class Building(db.Model):
     lat = db.Column(db.Float, nullable=False)
     lon = db.Column(db.Float, nullable=False)
     bathrooms = db.relationship('Bathroom', backref='building', lazy=True)
+    pass
 
 class Bathroom(db.Model):
     __tablename__ = 'bathroom'
@@ -28,6 +26,7 @@ class Bathroom(db.Model):
     floor = db.Column(db.Integer, primary_key= True, nullable=False)
     rID = db.Column(db.Integer, nullable=False)
     reviews = db.relationship('Review', backref='bathroom', lazy=True)
+    pass
 
 class Review(db.Model):
     __tablename__ = 'review'
@@ -37,6 +36,8 @@ class Review(db.Model):
     menstrual = db.Column(db.Boolean, nullable=True)
     cleanliness = db.Column(db.Integer, nullable=True)
     review = db.Column(db.String(140), nullable=True) # only 140 characters
+    pass
+
 
 # functions to add data
 def initialize_buildings():
@@ -86,8 +87,14 @@ def add_review(brID, rID, wheelchair, menstrual, clean, review):
         ))
     db.session.commit()
 
+
+from views import views
+
+app.register_blueprint(views) # url_prefix="/views"
+
 if __name__ == '__main__':
     with app.app_context():  # Needed for DB operations
         db.create_all()      # Creates the database and tables
         initialize_buildings()
     app.run(debug = True, port=5000)
+
