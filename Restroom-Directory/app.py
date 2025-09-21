@@ -31,7 +31,7 @@ class Bathroom(db.Model):
 
 class Review(db.Model):
     __tablename__ = 'review'
-    brID = db.Column(db.Integer, db.ForeignKey('bathroom.bID'), nullable=False)
+    brID = db.Column(db.Integer, db.ForeignKey('bathroom.brID'), nullable=False)
     rID = db.Column(db.Integer, primary_key=True, nullable=False)
     wheelchair = db.Column(db.Boolean, nullable=True)
     menstrual = db.Column(db.Boolean, nullable=True)
@@ -46,7 +46,7 @@ def initialize_buildings():
                     (4, "David Lawrence Hall", 40.4423869, -79.9549878)]
 
     for bID, name, lat, lon in buildings_data:
-        if not Building.query.get(bID):
+        if not db.session.get(Building, bID):
             db.session.add(Building(
                 bID = bID,
                 name = name,
@@ -56,7 +56,7 @@ def initialize_buildings():
     db.session.commit()
 
 def add_building(bID, name, lat, lon):
-    if not Building.query.get(bID):
+    if not db.session.get(Building, bID):
             db.session.add(Building(
                 bID = bID,
                 name = name,
@@ -66,7 +66,7 @@ def add_building(bID, name, lat, lon):
     db.session.commit()
 
 def add_bathroom(bID, floor, rID):
-    if not Bathroom.query.get(bID):
+    if not (db.session.get(Bathroom, bID) or db.session.get(Bathroom, floor)):
         db.session.add(Bathroom(
             bID=bID,
             floor = floor,
@@ -75,7 +75,7 @@ def add_bathroom(bID, floor, rID):
     db.session.commit()
 
 def add_review(brID, rID, wheelchair, menstrual, clean, review):
-    if not Review.query.get(rID):
+    if not db.session.get(Review, rID):
         db.session.add(Review(
             brID = brID,
             rID=rID,
@@ -89,4 +89,5 @@ def add_review(brID, rID, wheelchair, menstrual, clean, review):
 if __name__ == '__main__':
     with app.app_context():  # Needed for DB operations
         db.create_all()      # Creates the database and tables
+        initialize_buildings()
     app.run(debug = True, port=5000)
