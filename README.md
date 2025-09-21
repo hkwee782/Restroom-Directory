@@ -1,8 +1,5 @@
 # Restroom Directory
 
-### Tools Used
-
-
 ### 1. Clone the repo
 ```
 git clone <insert link here>
@@ -35,3 +32,6 @@ Navigate to the repository containing Restroom-Directory folder, then run:
 ```
 python app.py
 ```
+
+##### Disclaimer
+We used AI to debug and write some, but not most, of our code.
