@@ -35,8 +35,3 @@ Navigate to the repository containing Restroom-Directory folder, then run:
 ```
 python app.py
 ```
-
-### 6. Exit the app
-```
-CTRL + C
-```
