@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, redirect, jsonify
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import func
 
 app = Flask(__name__)
 
@@ -17,6 +18,8 @@ class Building(db.Model):
     name = db.Column(db.String(30), nullable=False)
     lat = db.Column(db.Float, nullable=False)
     lon = db.Column(db.Float, nullable=False)
+    opening = db.Column(db.DateTime(timezone=True), nullable=True)
+    closing = db.Column(db.DateTime(timezone=True), nullable=True)
     bathrooms = db.relationship('Bathroom', backref='building', lazy=True)
     pass
 
@@ -106,7 +109,7 @@ def add_building(bID, name, lat, lon):
 def add_bathroom(bID, floor, rID):
     if not (db.session.get(Bathroom, bID) or db.session.get(Bathroom, floor)):
         db.session.add(Bathroom(
-            bID=bID,
+            bID = bID,
             floor = floor,
             brID = rID
         ))
@@ -144,6 +147,30 @@ def home():
 def response():
     name = request.args.get('name', type=str)
     floor = request.args.get('floor', type=int)
+
+    result = db.session.query(
+        Building, Bathroom, Review
+    ).join(
+        Bathroom, Building.bID == Bathroom.bID
+    ).join(
+        Review, Bathroom.brID == Review.brID
+    ).filter(
+        Building.name == name,
+        Bathroom.floor == floor
+    ).first()
+
+    if result:
+        building, bathroom, review = result
+        # Pass the variables to the template
+        return render_template(
+            "response.html",
+            name=building.name,
+            floor=bathroom.floor,
+            wheelchair=review.wheelchair,
+            menstrual=review.menstrual,
+            baby_station=False, # Assuming no baby station for now
+            braille_signage=False # Assuming no braille signage for now
+        )
 
     return render_template("response.html", name = name, floor = floor)
 
