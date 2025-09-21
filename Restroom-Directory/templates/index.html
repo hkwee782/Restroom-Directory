@@ -12,69 +12,80 @@
 </head>
 <body onload="initMap()">
     <div class="sidenav">
-        <form>
-            <div class="search_rest">
-                <label for="location_zip">Find a Restroom</label>
-            </div>
-            <div class="search_rest">
-                <input id="location_zip" type="text" placeholder="Enter your Zip Code">
-                <i class="fas fa-magnifying-glass"></i>
-            </div>
-        </form>
-        <div class="filter">
-            <i class="fa-solid fa-filter"></i>
-            <h4>Filter</h4>
+    <form>
+        <div class="search_rest">
+            <label for="location_zip">Find a Restroom</label>
         </div>
-        <div class="building_block">
-            <h2>Cathedral of Learning<br></h2>
-            <h4>
-                <span class="open">Open · </span>
-                <span class="closes">Closes 12am</span>
-            </h4>
+        <div class="search_rest">
+            <input id="location_zip" type="text" placeholder="Enter your Zip Code">
+            <i class="fas fa-magnifying-glass"></i>
+        </div>
+    </form>
+    <div class="filter">
+        <i class="fa-solid fa-filter"></i>
+        <h4>Filter</h4>
+    </div>
+
+    {% for building in buildings %}
+    <div class="building_block">
+        <h2>{{ building.name }}</h2>
+        <h4>
+            <span class="open">Open · </span>
+            <span class="closes">Closes 12am</span>
+        </h4>
+
+        <div class="floor_row">
+            {% for bathroom in building.bathrooms %}
             <div class="building_floor_block">
-                <a href ="{{ url_for('buildings') }}">
-                <h4>Floor 1</h4>
-                <h4>&#9733; &#9733; &#9733; &#9734; &#9734;</h4>
+                <a href="{{ url_for('buildings') }}">
+                    <h4>
+                        {% if bathroom.floor == -1 %}
+                            Ground
+                        {% else %}
+                            Floor {{ bathroom.floor }}
+                        {% endif %}
+                    </h4>
+                    <h4>&#9733; &#9733; &#9733; &#9734; &#9734;</h4>
+                </a>
             </div>
-            </a>
+            {% endfor %}
         </div>
     </div>
+    {% endfor %}
+</div>
+
 
     <div class="main">
         <div id="map"></div>
     </div>
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
     <script>
-        var map;
+    var map;
 
-        function create_markers() {
-            var markers = [
-                ["Cathedral of Learning", "40.44424", "-79.95283"],
-                ["Wesley W. Posvar Hall", "40.4416","-79.9538"],
-                ["Michael L. Benedum Hall", "40.4436", "-79.9587"],
-                ["David Lawrence Hall", "40.4423869", "-79.9549878"],
-            ];
-
-            for (var i = 0; i < markers.length; i++) {
-                new L.marker([markers[i][1], markers[i][2]])
-                    .bindPopup(markers[i][0])
-                    .addTo(map);
-            }
+    function create_markers() {
+        var markers = {buildings_data};
+        
+        for (var i = 0; i < markers.length; i++) {
+            new L.marker([markers[i].lat, markers[i].lon])
+                .bindPopup(markers[i].name)
+                .addTo(map);
         }
+    }
 
-        function initMap() {
-            map = L.map('map', {
-                center: [40.44424, -79.95283],
-                zoom: 15
-            });
+    function initMap() {
+        map = L.map('map', {
+            center: [40.44424, -79.95283],
+            zoom: 15
+        });
 
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-            }).addTo(map);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
 
-            create_markers();
-        }
-    </script>
+        create_markers();
+    }
+</script>
+
 
 </body>
 </html>

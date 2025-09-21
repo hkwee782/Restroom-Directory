@@ -13,6 +13,7 @@ html, body{
     margin-left: 30%;
     height: 100%;
     width: 75%;
+    position: fixed;
 }
 
 .sidenav {
@@ -47,9 +48,14 @@ html, body{
     border-color: black;
     border-style: solid;
     border-radius: 15px;
-    width: fit-content; 
+    min-width: 120px; 
+    height: 80px;
     margin: 5px 5px 5px 0px;
     padding: 15px;
+}
+
+.building_floor_block:hover{
+    background-color: #ededed;
 }
 
 .search_rest{
@@ -100,3 +106,12 @@ html, body{
     font-size: 20px;
     margin-right: 5px;
 }
+.floor_row {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    gap: 10px;           
+    padding: 5px 0;     
+}
+
+

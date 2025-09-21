@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, jsonify
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
@@ -126,7 +126,16 @@ def add_review(brID, rID, wheelchair, menstrual, clean, review):
 
 @app.route("/")
 def home():
-    return render_template("index.html")
+    buildings = Building.query.all()
+
+    # Convert SQLAlchemy objects to dicts
+    buildings_data = [
+        {"id": b.bID, "name": b.name, "lat": b.lat, "lon": b.lon}
+        for b in buildings
+    ]
+
+    return render_template("index.html", buildings=buildings, buildings_data=buildings_data)
+
 
 @app.route("/response")
 def response():
