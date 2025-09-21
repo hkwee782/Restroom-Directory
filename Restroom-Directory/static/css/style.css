@@ -45,6 +45,10 @@ body {
     padding: 15px;
 }
 
+.building_block img{
+    width: 100px;
+}
+
 .building_block h2 {
     font-size: 1.2rem;
     margin-bottom: 5px;

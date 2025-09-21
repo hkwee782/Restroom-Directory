@@ -29,6 +29,8 @@
 
     {% for building in buildings %}
     <div class="building_block">
+        <img src="{{ building.image_url }}" alt="{{ building.name }}" class="building_image">
+        <div class = "building_info">
         <h2>{{ building.name }}</h2>
         <h4>
             <span class="open">Open · </span>
@@ -52,6 +54,7 @@
                 </button>
             </form>
             {% endfor %}
+        </div>
         </div>
     </div>
     {% endfor %}

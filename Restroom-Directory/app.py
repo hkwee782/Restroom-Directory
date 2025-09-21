@@ -18,6 +18,7 @@ class Building(db.Model):
     name = db.Column(db.String(30), nullable=False)
     lat = db.Column(db.Float, nullable=False)
     lon = db.Column(db.Float, nullable=False)
+    image_url = db.Column(db.String(200), nullable=True)
     opening = db.Column(db.DateTime(timezone=True), nullable=True)
     closing = db.Column(db.DateTime(timezone=True), nullable=True)
     bathrooms = db.relationship('Bathroom', backref='building', lazy=True)
@@ -44,18 +45,19 @@ class Review(db.Model):
 
 # functions to add data
 def initialize_buildings():
-    buildings_data = [(1, "Cathedral of Learning", 40.44424, -79.95283),
-                    (2, "Wesley W. Posvar Hall", 40.4416,-79.9538),
-                    (3, "Michael L. Benedum Hall", 40.4436, -79.9587),
-                    (4, "David Lawrence Hall", 40.4423869, -79.9549878)]
+    buildings_data = [(1, "Cathedral of Learning", 40.44424, -79.95283, "static/images/cathedral.png"),
+                    (2, "Wesley W. Posvar Hall", 40.4416,-79.9538, "static/images/posvar.png"),
+                    (3, "Michael L. Benedum Hall", 40.4436, -79.9587, "static/images/benedum.png"),
+                    (4, "David Lawrence Hall", 40.4423869, -79.9549878, "static/images/lawrence.png")]
 
-    for bID, name, lat, lon in buildings_data:
+    for bID, name, lat, lon, img in buildings_data:
         if not db.session.get(Building, bID):
             db.session.add(Building(
                 bID = bID,
                 name = name,
                 lat = lat,
-                lon = lon
+                lon = lon,
+                image_url = img
             ))
     db.session.commit()
 
