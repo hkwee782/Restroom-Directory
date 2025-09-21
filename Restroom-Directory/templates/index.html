@@ -14,6 +14,7 @@
     <div class="sidenav">
     <form>
         <div class="search_rest">
+            <img src="static/restdirlogo.png" alt="Restroom Directory Logo">
             <label for="location_zip">Find a Restroom</label>
         </div>
         <div class="search_rest">
@@ -66,7 +67,7 @@
     var map;
 
     function create_markers() {
-        var markers = {buildings_data};
+        var markers = {{ buildings_data | safe }};
         
         for (var i = 0; i < markers.length; i++) {
             new L.marker([markers[i].lat, markers[i].lon])
