@@ -36,8 +36,10 @@
 
         <div class="floor_row">
             {% for bathroom in building.bathrooms %}
-            <div class="building_floor_block">
-                <a href="{{ url_for('response', name=building.name, floor=bathroom.floor )}}">
+            <form method="get" action="{{ url_for('response') }}">
+                <input type="hidden" name="name" value="{{ building.name }}">
+                <input type="hidden" name="floor" value="{{ bathroom.floor }}">
+                <button type="submit" class="building_floor_block">
                     <h4>
                         {% if bathroom.floor == -1 %}
                             Ground
@@ -46,13 +48,13 @@
                         {% endif %}
                     </h4>
                     <h4>&#9733; &#9733; &#9733; &#9734; &#9734;</h4>
-                </a>
-            </div>
+                </button>
+            </form>
             {% endfor %}
         </div>
     </div>
     {% endfor %}
-</div>
+
 
 
     <div class="main">
