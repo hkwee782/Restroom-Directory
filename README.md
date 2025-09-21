@@ -1,4 +1,7 @@
-# Restroom-Directory
+# Restroom Directory
+
+### Tools Used
+
 
 ### 1. Clone the repo
 ```
@@ -31,9 +34,4 @@ pip install psycopg2-binary
 Navigate to the repository containing Restroom-Directory folder, then run:
 ```
 python app.py
-```
-
-### 6. Exit the app
-```
-CTRL + C
 ```
